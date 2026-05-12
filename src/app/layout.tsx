@@ -22,10 +22,6 @@ const dancing = Dancing_Script({
 export const metadata: Metadata = {
   title: "Mis XV Años | Alexia Camila",
   description: "Te invito a compartir conmigo este momento tan especial. ¡No faltes!",
-  icons: {
-    icon: "/favicon.png",
-    apple: "/apple-icon.png",
-  },
   openGraph: {
     title: "Mis XV Años | Alexia Camila",
     description: "Te invito a compartir conmigo este momento tan especial. ¡No faltes!",

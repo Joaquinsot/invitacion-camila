@@ -12,8 +12,20 @@ export function CalendarSection() {
     "28", "29", "30", "", "", "", ""
   ];
 
+  const handleAddToCalendar = () => {
+    const title = "XV Años Camila";
+    const details = "Acompáñanos a celebrar los XV años de Camila. Itinerario: Misa, Recepción, Cena y Fiesta.";
+    const location = "Av. 4 Pte. 2709, Amor, 72140 Puebla, Pue.";
+    const startTime = "20260619T180000";
+    const endTime = "20260620T020000";
+    
+    const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startTime}/${endTime}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+    
+    window.open(googleCalendarUrl, '_blank');
+  };
+
   return (
-    <section className="py-16 px-4 relative z-10 flex justify-center">
+    <section className="py-16 px-4 relative z-10 flex flex-col items-center">
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -48,22 +60,37 @@ export function CalendarSection() {
             return (
               <div key={`date-${i}`} className="relative flex items-center justify-center h-8 md:h-10">
                 {isSpecial ? (
-                  <motion.div 
+                  <motion.button 
+                    onClick={handleAddToCalendar}
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
+                    whileHover={{ scale: 1.15, rotate: [0, -5, 5, 0] }}
                     viewport={{ once: true }}
-                    transition={{ type: "spring", delay: 0.5 }}
-                    className="absolute inset-0 bg-gradient-to-tr from-pastel-pink-dark to-pastel-pink rounded-full shadow-[0_0_15px_rgba(216,174,179,0.5)] z-0"
-                  />
-                ) : null}
-                <span className={`relative z-10 font-light text-sm md:text-base ${isSpecial ? 'text-white font-medium' : 'text-gray-600'}`}>
-                  {date}
-                </span>
+                    title="Agendar en mi calendario"
+                    transition={{ 
+                      type: "tween", 
+                      duration: 0.4,
+                      ease: "easeInOut"
+                    }}
+                    className="absolute inset-0 bg-gradient-to-tr from-pastel-pink-dark to-pastel-pink rounded-full shadow-[0_4px_15px_rgba(216,174,179,0.6)] z-20 cursor-pointer flex items-center justify-center group"
+                  >
+                    <span className="relative z-10 font-medium text-white text-sm md:text-base group-hover:scale-110 transition-transform">
+                      {date}
+                    </span>
+                  </motion.button>
+                ) : (
+                  <span className="relative z-10 font-light text-sm md:text-base text-gray-600">
+                    {date}
+                  </span>
+                )}
               </div>
             );
           })}
         </div>
       </motion.div>
+      <p className="mt-6 text-gray-400 text-[10px] uppercase tracking-widest italic animate-pulse">
+        Toca el día 19 para agendar
+      </p>
     </section>
   );
 }

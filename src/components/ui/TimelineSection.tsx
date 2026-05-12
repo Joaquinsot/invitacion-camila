@@ -2,81 +2,85 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Church, Sparkles, Heart, Music, MoonStar } from "lucide-react";
+import { Church, Sparkles, Heart, Music, Utensils, Disc } from "lucide-react";
 
 const events = [
   { time: "6:00 PM", title: "Misa", icon: <Church className="w-6 h-6 stroke-[1.5]" /> },
-  { time: "7:00 PM", title: "Apertura del salón", icon: <Sparkles className="w-6 h-6 stroke-[1.5]" /> },
-  { time: "8:30 PM", title: "Vals", icon: <Heart className="w-6 h-6 stroke-[1.5]" /> },
-  { time: "9:30 PM", title: "Baile", icon: <Music className="w-6 h-6 stroke-[1.5]" /> },
-  { time: "2:00 AM", title: "Final de la fiesta", icon: <MoonStar className="w-6 h-6 stroke-[1.5]" /> }
+  { time: "7:00 PM", title: "Recepción", icon: <Sparkles className="w-6 h-6 stroke-[1.5]" /> },
+  { time: "8:00 PM", title: "Cena", icon: <Utensils className="w-6 h-6 stroke-[1.5]" /> },
+  { time: "9:00 PM", title: "Vals", icon: <Heart className="w-6 h-6 stroke-[1.5]" /> },
+  { time: "10:00 PM", title: "Fiesta", icon: <Music className="w-6 h-6 stroke-[1.5]" /> },
+  { time: "12:00 AM", title: "Tornamesa", icon: <Disc className="w-6 h-6 stroke-[1.5]" /> }
 ];
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function TimelineSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const timelineItems = gsap.utils.toArray<HTMLElement>('.timeline-item');
-    const dots = gsap.utils.toArray<HTMLElement>('.timeline-dot');
-    const iconCircles = gsap.utils.toArray<HTMLElement>('.timeline-icon-circle');
-    
-    // Animate the line
-    gsap.fromTo(lineRef.current, 
-      { height: 0 },
-      {
-        height: "100%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top center",
-          end: "bottom center",
-          scrub: true,
+    const ctx = gsap.context(() => {
+      const timelineItems = gsap.utils.toArray<HTMLElement>('.timeline-item');
+      const dots = gsap.utils.toArray<HTMLElement>('.timeline-dot');
+      const iconCircles = gsap.utils.toArray<HTMLElement>('.timeline-icon-circle');
+      
+      // Animate the line
+      gsap.fromTo(lineRef.current, 
+        { height: 0 },
+        {
+          height: "100%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top center",
+            end: "bottom center+=100",
+            scrub: true,
+          }
         }
-      }
-    );
+      );
 
-    // Animate each item
-    timelineItems.forEach((item, i) => {
-      // Estado inicial de los círculos de íconos
-      gsap.set(iconCircles[i], { scale: 0, rotation: -180, opacity: 0 });
-      gsap.set(item, { opacity: 0.4, y: 30 });
+      // Animate each item
+      timelineItems.forEach((item, i) => {
+        // Estado inicial
+        gsap.set(iconCircles[i], { scale: 0, rotation: -180, opacity: 0 });
+        gsap.set(item, { opacity: 0.4, y: 30 });
 
-      ScrollTrigger.create({
-        trigger: item,
-        start: "top center+=100",
-        onEnter: () => {
-          // Animar contenedor del item
-          gsap.to(item, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" });
-          // Animar el puntito central
-          gsap.to(dots[i], { backgroundColor: "#ffffff", scale: 1.8, duration: 0.4, ease: "back.out" });
-          // Animar el círculo grande del ícono (Pop & Spin)
-          gsap.to(iconCircles[i], { 
-            scale: 1, 
-            rotation: 0, 
-            opacity: 1, 
-            duration: 0.7, 
-            ease: "back.out(2)", 
-            delay: 0.1 
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(item, { opacity: 0.4, y: 30, duration: 0.4 });
-          gsap.to(dots[i], { backgroundColor: "rgba(255,255,255,0.3)", scale: 1, duration: 0.4 });
-          gsap.to(iconCircles[i], { scale: 0, rotation: -180, opacity: 0, duration: 0.4 });
-        }
+        ScrollTrigger.create({
+          trigger: item,
+          start: "top center+=100",
+          onEnter: () => {
+            gsap.to(item, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" });
+            gsap.to(dots[i], { backgroundColor: "#ffffff", scale: 1.8, duration: 0.4, ease: "back.out" });
+            gsap.to(iconCircles[i], { 
+              scale: 1, 
+              rotation: 0, 
+              opacity: 1, 
+              duration: 0.7, 
+              ease: "back.out(2)", 
+              delay: 0.1 
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(item, { opacity: 0.4, y: 30, duration: 0.4 });
+            gsap.to(dots[i], { backgroundColor: "rgba(255,255,255,0.3)", scale: 1, duration: 0.4 });
+            gsap.to(iconCircles[i], { scale: 0, rotation: -180, opacity: 0, duration: 0.4 });
+          }
+        });
       });
-    });
+    }, containerRef);
 
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
+    // Refresh ScrollTrigger to ensure correct positions
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section className="py-24 px-4 relative z-10" ref={containerRef}>
+    <section className="pt-24 pb-48 px-4 relative z-10" ref={containerRef}>
+
       
       <div className="max-w-3xl mx-auto relative z-10">
         <div className="text-center mb-20">

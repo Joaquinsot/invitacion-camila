@@ -20,8 +20,27 @@ const dancing = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Mis 15 Años | Camila",
-  description: "Te invito a celebrar conmigo mis XV Años.",
+  title: "Mis XV Años | Alexia Camila",
+  description: "Te invito a compartir conmigo este momento tan especial. ¡No faltes!",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/apple-icon.png",
+  },
+  openGraph: {
+    title: "Mis XV Años | Alexia Camila",
+    description: "Te invito a compartir conmigo este momento tan especial. ¡No faltes!",
+    url: "https://invitacion-camila.vercel.app", // O tu dominio final
+    siteName: "Invitación Alexia Camila",
+    images: [
+      {
+        url: "/images/nueva-portada-alexia.png", // Usaremos la imagen que subiste
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "es_MX",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

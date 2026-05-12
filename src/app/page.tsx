@@ -1,65 +1,103 @@
-import Image from "next/image";
+"use client";
+import { useState, Suspense } from "react";
+import { HeroSection } from "@/components/ui/HeroSection";
+import { Countdown } from "@/components/ui/Countdown";
+import { EnvelopeOpener } from "@/components/ui/EnvelopeOpener";
+import { MessageSection } from "@/components/ui/MessageSection";
+import { CalendarSection } from "@/components/ui/CalendarSection";
+import { GallerySection } from "@/components/ui/GallerySection";
+import { MapSection } from "@/components/ui/MapSection";
+import { TimelineSection } from "@/components/ui/TimelineSection";
+import { GiftsSection } from "@/components/ui/GiftsSection";
+import { RSVPSection } from "@/components/ui/RSVPSection";
+import { GoodbyeSection } from "@/components/ui/GoodbyeSection";
+
+const FloralDivider = ({ variant = "pink" }: { variant?: "pink" | "green" }) => {
+  const color = variant === "pink" ? "text-white/60" : "text-[#dec1c3]/60";
+  const line = variant === "pink" ? "bg-white/30" : "bg-[#dec1c3]/30";
+  return (
+    <div className="flex justify-center items-center py-4">
+      <div className={`h-[1px] w-16 md:w-32 ${line}`}></div>
+      <span className={`mx-6 ${color} text-2xl`}>✧ ❀ ✧</span>
+      <div className={`h-[1px] w-16 md:w-32 ${line}`}></div>
+    </div>
+  );
+};
 
 export default function Home() {
+  const [opened, setOpened] = useState(false);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen relative">
+      {!opened && <EnvelopeOpener onOpen={() => setOpened(true)} />}
+      
+      {opened && (
+        <div className="animate-in fade-in duration-1000">
+          <HeroSection />
+          
+          {/* Sección Rosa - Mensaje con textura de seda */}
+          <div className="bg-[#dec1c3] relative overflow-hidden">
+            {/* Textura de seda que cubre todo */}
+            <div 
+              className="absolute inset-0 z-0 opacity-50 pointer-events-none"
+              style={{
+                backgroundImage: "url('/images/textura-seda-vertical.png')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                mixBlendMode: 'overlay'
+              }}
+            ></div>
+            <MessageSection />
+            <FloralDivider variant="pink" />
+          </div>
+
+          {/* Sección Countdown - Imagen de fondo completa */}
+          <Countdown />
+
+          {/* Sección Rosa - Calendario */}
+          <div className="bg-[#dec1c3]">
+            <CalendarSection />
+            <FloralDivider variant="pink" />
+          </div>
+
+          {/* Sección Rosa - Galería */}
+          <div className="bg-[#dec1c3]">
+            <GallerySection />
+            <FloralDivider variant="pink" />
+          </div>
+
+          {/* Sección Rosa - Mapa */}
+          <div className="bg-[#dec1c3]">
+            <MapSection />
+            <FloralDivider variant="pink" />
+          </div>
+          {/* Separador floral entre ubicaciones e itinerario */}
+          <div className="w-full">
+            <img src="/images/separador-flores.png" alt="Separador floral" className="w-full h-auto object-cover" />
+          </div>
+
+          {/* Sección Verde - Itinerario hasta el final */}
+          <div className="bg-[#8bb3a4]">
+            <TimelineSection />
+            <FloralDivider variant="green" />
+
+            <GiftsSection />
+            <FloralDivider variant="green" />
+
+            <Suspense fallback={<div className="h-40 flex items-center justify-center text-white">Cargando...</div>}>
+              <RSVPSection />
+            </Suspense>
+            <FloralDivider variant="green" />
+
+            <GoodbyeSection />
+          
+            <footer className="py-12 text-center text-white/90 font-light text-xs uppercase tracking-widest">
+              <p>© 2026 XV Años Camila. Todos los derechos reservados.</p>
+              <p className="mt-2 text-white font-medium">Diseñado con ❤️ para una noche mágica.</p>
+            </footer>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      )}
+    </main>
   );
 }

@@ -9,21 +9,29 @@ interface MusicPlayerProps {
 }
 
 export function MusicPlayer({ isPlaying, onToggle }: MusicPlayerProps) {
-  const playerRef = useRef<HTMLIFrameElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play().catch(err => {
+          console.log("Esperando interacción para reproducir audio:", err);
+        });
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
 
   return (
     <div className="fixed bottom-6 right-6 z-[60]">
-      {/* YouTube Hidden Player */}
-      <div className="hidden">
-        <iframe
-          ref={playerRef}
-          width="1"
-          height="1"
-          src={`https://www.youtube.com/embed/P61FN0qUmE0?autoplay=${isPlaying ? 1 : 0}&mute=0&loop=1&playlist=P61FN0qUmE0&enablejsapi=1`}
-          title="YouTube video player"
-          allow="autoplay"
-        ></iframe>
-      </div>
+      {/* Audio Engine */}
+      <audio
+        ref={audioRef}
+        src="/music/cancion.mp3"
+        loop
+        preload="auto"
+      />
 
       <motion.button
         onClick={onToggle}

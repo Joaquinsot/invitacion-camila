@@ -70,11 +70,11 @@ export function GallerySection() {
             >
               {/* Marco tipo polaroid */}
               <div className="bg-white p-3 pb-16 md:p-4 md:pb-20 rounded-sm shadow-[0_20px_60px_rgba(0,0,0,0.25)] hover:shadow-[0_30px_80px_rgba(0,0,0,0.35)] transition-shadow duration-500">
-                <div className="w-[280px] h-[200px] md:w-[380px] md:h-[280px] overflow-hidden">
+                <div className="w-[280px] h-[380px] md:w-[380px] md:h-[500px] overflow-hidden">
                   <img 
-                    src="/images/sesion-sentada.jpg" 
+                    src="/images/camila-standing.jpg" 
                     alt="Sesión de Camila" 
-                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-1000" 
+                    className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" 
                   />
                 </div>
                 {/* Texto tipo polaroid */}

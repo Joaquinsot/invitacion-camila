@@ -12,6 +12,8 @@ import { GiftsSection } from "@/components/ui/GiftsSection";
 import { RSVPSection } from "@/components/ui/RSVPSection";
 import { GoodbyeSection } from "@/components/ui/GoodbyeSection";
 
+import { MusicPlayer } from "@/components/ui/MusicPlayer";
+
 const FloralDivider = ({ variant = "pink" }: { variant?: "pink" | "green" }) => {
   const color = variant === "pink" ? "text-white/60" : "text-[#dec1c3]/60";
   const line = variant === "pink" ? "bg-white/30" : "bg-[#dec1c3]/30";
@@ -26,11 +28,19 @@ const FloralDivider = ({ variant = "pink" }: { variant?: "pink" | "green" }) => 
 
 export default function Home() {
   const [opened, setOpened] = useState(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+
+  const handleOpen = () => {
+    setOpened(true);
+    setIsMusicPlaying(true);
+  };
 
   return (
     <main className="min-h-screen relative">
-      {!opened && <EnvelopeOpener onOpen={() => setOpened(true)} />}
+      {!opened && <EnvelopeOpener onOpen={handleOpen} />}
       
+      <MusicPlayer isPlaying={isMusicPlaying} onToggle={() => setIsMusicPlaying(!isMusicPlaying)} />
+
       {opened && (
         <div className="animate-in fade-in duration-1000">
           <HeroSection />

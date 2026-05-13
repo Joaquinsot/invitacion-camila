@@ -35,9 +35,9 @@ export function Countdown() {
       {/* Imagen de fondo a pantalla completa */}
       <div className="relative w-full min-h-[100vh]">
         <img 
-          src="/images/camila-standing.jpg" 
+          src="/images/sesion-sentada.jpg" 
           alt="Camila" 
-          className="absolute inset-0 w-full h-full object-cover object-top"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
         
         {/* Overlay oscuro sutil para legibilidad */}

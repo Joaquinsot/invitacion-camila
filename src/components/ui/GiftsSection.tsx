@@ -54,7 +54,7 @@ export function GiftsSection() {
         </motion.div>
       </div>
 
-      {/* Código de Vestimenta - Estilo Itinerario */}
+      {/* Código de Vestimenta - Solo el mensaje informativo */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -62,52 +62,15 @@ export function GiftsSection() {
         transition={{ duration: 1 }}
         className="max-w-3xl mx-auto relative z-10"
       >
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="font-script text-6xl md:text-7xl text-white drop-shadow-md mb-4">Código de Vestimenta</h2>
           <div className="h-px w-24 bg-white/50 mx-auto"></div>
+          <h3 className="font-serif text-2xl tracking-[0.3em] uppercase text-white/90 mt-6 italic">Formal</h3>
         </div>
 
         <div className="relative pb-10">
-          {/* Línea vertical decorativa similar al itinerario */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/20 -translate-x-1/2"></div>
-          
-          <div className="space-y-24">
-            {/* Título del código */}
-            <div className="flex items-center justify-center relative">
-               <div className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-3 rounded-full relative z-20">
-                  <h3 className="font-serif text-2xl tracking-[0.3em] uppercase text-white shadow-sm">Formal</h3>
-               </div>
-            </div>
-
-            {/* Iconos centrados estilo timeline */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-20 relative">
-              
-              {/* Mujeres */}
-              <div className="relative flex flex-col items-center">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.15)] border border-white/50 flex items-center justify-center z-20 text-[#8bb3a4] mb-4">
-                  <svg className="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 4l-2 3v13h10V7l-2-3H9zM9 7h6" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M12 7v13M7 11h10" />
-                  </svg>
-                </div>
-                <h4 className="font-serif text-2xl text-white mb-1">Mujeres</h4>
-                <p className="text-white/80 font-medium text-xs tracking-[0.2em] uppercase italic">Vestido Largo</p>
-              </div>
-
-              {/* Hombres */}
-              <div className="relative flex flex-col items-center">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.15)] border border-white/50 flex items-center justify-center z-20 text-[#8bb3a4] mb-4">
-                  <svg className="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M12 3L9 7h6l-3-4zM9 7v14h6V7H9z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M12 7v14M10 11h4M10 15h4" />
-                  </svg>
-                </div>
-                <h4 className="font-serif text-2xl text-white mb-1">Hombres</h4>
-                <p className="text-white/80 font-medium text-xs tracking-[0.2em] uppercase italic">Traje Formal</p>
-              </div>
-            </div>
-
-            {/* Texto informativo con estilo de item de timeline */}
+          <div className="space-y-12">
+            {/* Texto informativo */}
             <div className="flex justify-center relative">
               <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl max-w-2xl text-center relative z-20">
                 <p className="text-white font-light text-sm md:text-base leading-relaxed">
@@ -115,11 +78,9 @@ export function GiftsSection() {
                 </p>
               </div>
             </div>
-
           </div>
         </div>
       </motion.div>
-
     </section>
   );
 }

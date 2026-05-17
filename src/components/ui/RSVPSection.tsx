@@ -65,7 +65,7 @@ const guestsDatabase = [
   { id: 57, code: "1057", name: "Beatriz", adults: 2, kids: 0 },
   { id: 58, code: "1058", name: "Maria Luisa", adults: 5, kids: 0 },
   { id: 59, code: "1059", name: "Jose Luis", adults: 2, kids: 0 },
-  { id: 60, code: "1060", name: "Alejandro Ramon", adults: 3, kids: 0 },
+  { id: 60, code: "1060", name: "Alejandro Ramon", adults: 2, kids: 0 },
   { id: 61, code: "1061", name: "Gerardo Beltran", adults: 2, kids: 0 },
   { id: 62, code: "1062", name: "Bertha Zarate", adults: 5, kids: 0 },
   { id: 63, code: "1063", name: "Padilla", adults: 4, kids: 0 },
@@ -103,6 +103,7 @@ const guestsDatabase = [
   { id: 95, code: "1095", name: "Guadalupe Luna", adults: 2, kids: 0 },
   { id: 96, code: "1096", name: "Maria Eugenia", adults: 2, kids: 0 },
   { id: 97, code: "1097", name: "Paola Garzón", adults: 2, kids: 0 },
+  { id: 98, code: "1098", name: "Herlinda", adults: 4, kids: 0 },
 ];
 
 export function RSVPSection() {
